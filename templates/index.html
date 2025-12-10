@@ -335,19 +335,33 @@
             }
 
             .reels {
-                gap: 10px;
-                /* Smaller gap */
+                flex-direction: column;
+                /* Stack vertically on mobile */
+                gap: 15px;
+                /* Space between stacked reels */
+                align-items: stretch;
+                /* Full width reels */
             }
 
             .reel {
-                min-width: 140px;
-                /* Narrower reels */
-                padding: 20px 10px;
+                width: 100%;
+                /* Full width on mobile */
+                min-width: unset;
+                /* Remove min-width */
+                max-width: 400px;
+                /* Limit max width */
+                margin: 0 auto;
+                /* Center the reels */
+                font-size: 1.3rem;
+                /* Keep text large on mobile */
+                padding: 30px 20px;
+                /* More vertical padding */
             }
 
             .spin-button {
-                padding: 15px 35px;
-                /* Smaller button */
+                padding: 18px 40px;
+                /* Slightly smaller button */
+                font-size: 1.1rem;
             }
         }
     </style>
