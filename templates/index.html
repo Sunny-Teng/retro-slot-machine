@@ -327,41 +327,62 @@
             line-height: 1.8;
         }
 
-        /* Mobile responsive adjustments */
-        @media (max-width: 600px) {
+        /* Mobile responsive adjustments - increased breakpoint for better mobile experience */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.5rem;
+                /* Slightly smaller title on mobile */
+            }
+
             .arcade-frame {
-                padding: 30px 20px;
+                padding: 25px 15px;
                 /* Less padding on mobile */
             }
 
             .reels {
-                flex-direction: column;
-                /* Stack vertically on mobile */
-                gap: 15px;
-                /* Space between stacked reels */
+                flex-direction: column !important;
+                /* Force vertical stacking on mobile */
+                gap: 20px;
+                /* More space between stacked reels */
                 align-items: stretch;
                 /* Full width reels */
             }
 
             .reel {
-                width: 100%;
+                width: 100% !important;
                 /* Full width on mobile */
-                min-width: unset;
+                min-width: unset !important;
                 /* Remove min-width */
-                max-width: 400px;
-                /* Limit max width */
+                max-width: 100%;
+                /* Full width */
                 margin: 0 auto;
                 /* Center the reels */
-                font-size: 1.3rem;
-                /* Keep text large on mobile */
-                padding: 30px 20px;
-                /* More vertical padding */
+                font-size: 1.5rem !important;
+                /* Larger text on mobile */
+                padding: 35px 20px;
+                /* More vertical padding for bigger touch targets */
+                height: 110px;
+                /* Slightly taller for better visibility */
+            }
+
+            .reel-label {
+                font-size: 0.6rem;
+                /* Slightly larger labels */
             }
 
             .spin-button {
-                padding: 18px 40px;
-                /* Slightly smaller button */
-                font-size: 1.1rem;
+                padding: 20px 45px;
+                /* Bigger button for mobile */
+                font-size: 1.2rem;
+                width: 100%;
+                /* Full width button */
+                max-width: 300px;
+                /* But not too wide */
+            }
+
+            .credits {
+                font-size: 0.55rem;
+                /* Slightly larger credits text */
             }
         }
     </style>
