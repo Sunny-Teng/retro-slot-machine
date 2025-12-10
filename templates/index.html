@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>🎰 RETRO SLOT MACHINE 🎰</title>
+    <!-- Import retro pixel font from Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <style>
+        /* Reset default browser styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Main body styling with retro arcade background */
+        body {
+            font-family: 'Press Start 2P', cursive;
+            /* Retro pixel font */
+            text-align: center;
+            min-height: 100vh;
+            /* Full viewport height */
+            background: linear-gradient(135deg, #1a0033 0%, #330066 50%, #1a0033 100%);
+            /* Purple gradient */
+            color: #fff;
+            padding: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Scanline effect overlay - creates that old CRT monitor look */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            /* Horizontal lines across the screen */
+            background: repeating-linear-gradient(0deg,
+                    rgba(0, 0, 0, 0.15),
+                    rgba(0, 0, 0, 0.15) 1px,
+                    transparent 1px,
+                    transparent 2px);
+            pointer-events: none;
+            /* Don't block clicks */
+            z-index: 1000;
+            /* Always on top */
+        }
+
+        /* Arcade cabinet frame - the main container */
+        .arcade-frame {
+            max-width: 800px;
+            margin: 0 auto;
+            /* Center horizontally */
+            background: linear-gradient(145deg, #2d1b4e, #1a0f2e);
+            /* Dark purple gradient */
+            border: 8px solid #ff00ff;
+            /* Bright magenta border */
+            border-radius: 30px;
+            /* Rounded corners */
+            padding: 40px 30px;
+            /* Multiple box shadows for neon glow effect */
+            box-shadow:
+                0 0 30px rgba(255, 0, 255, 0.5),
+                /* Magenta glow */
+                0 0 60px rgba(0, 255, 255, 0.3),
+                /* Cyan glow */
+                inset 0 0 20px rgba(0, 0, 0, 0.5);
+            /* Inner shadow for depth */
+            position: relative;
+        }
+
+        /* Main title styling */
+        h1 {
+            font-size: clamp(1.2rem, 4vw, 2rem);
+            /* Responsive font size */
+            margin-bottom: 10px;
+            /* Multiple text shadows create neon glow */
+            text-shadow:
+                0 0 10px #ff00ff,
+                0 0 20px #ff00ff,
+                0 0 30px #ff00ff,
+                3px 3px 0px #00ffff;
+            /* Cyan offset shadow */
+            animation: glow 2s ease-in-out infinite alternate;
+            /* Pulsing glow */
+            line-height: 1.5;
+        }
+
+        /* Glow animation - makes text pulse */
+        @keyframes glow {
+            from {
+                text-shadow:
+                    0 0 10px #ff00ff,
+                    0 0 20px #ff00ff,
+                    0 0 30px #ff00ff,
+                    3px 3px 0px #00ffff;
+            }
+
+            to {
+                text-shadow:
+                    0 0 20px #ff00ff,
+                    0 0 30px #ff00ff,
+                    0 0 40px #ff00ff,
+                    3px 3px 0px #00ffff;
+            }
+        }
+
+        /* Subtitle text below title */
+        .subtitle {
+            font-size: clamp(0.5rem, 1.5vw, 0.8rem);
+            /* Responsive size */
+            color: #00ffff;
+            /* Cyan color */
+            margin-bottom: 40px;
+            text-shadow: 0 0 10px #00ffff;
+            /* Cyan glow */
+            line-height: 1.8;
+        }
+
+        /* Screen container - looks like arcade monitor */
+        .screen {
+            background: #000;
+            /* Black screen background */
+            border: 6px solid #444;
+            /* Gray border */
+            border-radius: 15px;
+            padding: 30px 20px;
+            margin-bottom: 30px;
+            /* Inner cyan glow and outer shadow */
+            box-shadow:
+                inset 0 0 30px rgba(0, 255, 255, 0.2),
+                0 0 20px rgba(0, 0, 0, 0.8);
+        }
+
+        /* Container for all three reels */
+        .reels {
+            display: flex;
+            /* Horizontal layout */
+            justify-content: center;
+            /* Center items */
+            gap: 15px;
+            /* Space between reels */
+            margin: 30px 0;
+            flex-wrap: wrap;
+            /* Wrap on small screens */
+        }
+
+        /* Individual reel styling */
+        .reel {
+            background: linear-gradient(180deg, #1a1a1a 0%, #0a0a0a 100%);
+            /* Dark gradient */
+            border: 4px solid #00ffff;
+            /* Cyan border */
+            border-radius: 10px;
+            padding: 25px 15px;
+            min-width: 200px;
+            /* Increased from 180px for longer words */
+            height: 100px;
+            /* Fixed height to prevent shifting */
+            font-size: clamp(0.85rem, 2vw, 1.2rem);
+            /* Slightly smaller font */
+            color: #00ff00;
+            /* Green text */
+            /* Green glow effect */
+            text-shadow:
+                0 0 10px #00ff00,
+                0 0 20px #00ff00;
+            /* Cyan glow around reel */
+            box-shadow:
+                0 0 15px rgba(0, 255, 255, 0.5),
+                inset 0 0 10px rgba(0, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+            /* Hide overflow */
+            line-height: 1.5;
+            display: flex;
+            /* Flexbox for centering */
+            align-items: center;
+            /* Vertical center */
+            justify-content: center;
+            /* Horizontal center */
+            white-space: nowrap;
+            /* Keep text on one line */
+            text-overflow: ellipsis;
+            /* Add ... if text too long */
+        }
+
+        /* Shine effect that moves across reels */
+        .reel::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            /* Start off-screen left */
+            width: 100%;
+            height: 100%;
+            /* White gradient that moves across */
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            animation: shine 3s infinite;
+            /* Repeating animation */
+        }
+
+        /* Shine animation - moves light across reel */
+        @keyframes shine {
+            0% {
+                left: -100%;
+            }
+
+            50%,
+            100% {
+                left: 100%;
+            }
+        }
+
+        /* Label above each reel (VERB, ADJECTIVE, NOUN) */
+        .reel-label {
+            font-size: 0.5rem;
+            color: #ff00ff;
+            /* Magenta */
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            /* ALL CAPS */
+            letter-spacing: 2px;
+            /* Space between letters */
+        }
+
+        /* Spin animation - bounces up and down */
+        @keyframes spin {
+
+            0%,
+            100% {
+                transform: translateY(0px);
+            }
+
+            /* Normal position */
+            25% {
+                transform: translateY(-15px);
+            }
+
+            /* Move up */
+            50% {
+                transform: translateY(0px);
+            }
+
+            /* Back to normal */
+            75% {
+                transform: translateY(15px);
+            }
+
+            /* Move down */
+        }
+
+        /* Applied to reels when spinning */
+        .spinning {
+            animation: spin 0.15s ease-in-out 20;
+            /* Fast bouncing, 20 times */
+            color: #ffff00;
+            /* Yellow while spinning */
+            /* Yellow glow while spinning */
+            text-shadow:
+                0 0 10px #ffff00,
+                0 0 20px #ffff00;
+        }
+
+        /* Main SPIN button */
+        .spin-button {
+            background: linear-gradient(145deg, #ff0080, #ff00ff);
+            /* Pink to magenta gradient */
+            color: white;
+            border: 4px solid #00ffff;
+            /* Cyan border */
+            padding: 20px 50px;
+            font-size: clamp(1rem, 2vw, 1.3rem);
+            /* Responsive size */
+            font-family: 'Press Start 2P', cursive;
+            /* Pixel font */
+            border-radius: 15px;
+            cursor: pointer;
+            /* Hand cursor on hover */
+            text-shadow: 2px 2px 0px #000;
+            /* Black shadow for depth */
+            /* Multiple shadows for 3D effect */
+            box-shadow:
+                0 0 20px rgba(255, 0, 255, 0.8),
+                /* Magenta glow */
+                0 8px 0 #660033,
+                /* Dark shadow below (3D effect) */
+                0 12px 20px rgba(0, 0, 0, 0.5);
+            /* Soft shadow */
+            transition: all 0.1s;
+            /* Smooth transitions */
+            position: relative;
+            top: 0;
+            /* Will change when clicked */
+        }
+
+        /* Button hover effect */
+        .spin-button:hover {
+            background: linear-gradient(145deg, #ff00ff, #ff0080);
+            /* Reverse gradient */
+            /* Brighter glow on hover */
+            box-shadow:
+                0 0 30px rgba(255, 0, 255, 1),
+                0 8px 0 #660033,
+                0 12px 25px rgba(0, 0, 0, 0.6);
+        }
+
+        /* Button click effect - looks pressed */
+        .spin-button:active {
+            top: 4px;
+            /* Move down */
+            /* Smaller shadow when pressed */
+            box-shadow:
+                0 0 20px rgba(255, 0, 255, 0.8),
+                0 4px 0 #660033,
+                0 8px 15px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Credits text at bottom */
+        .credits {
+            margin-top: 30px;
+            font-size: 0.6rem;
+            color: #888;
+            /* Gray */
+            line-height: 1.8;
+        }
+
+        /* Mobile responsive adjustments */
+        @media (max-width: 600px) {
+            .arcade-frame {
+                padding: 30px 20px;
+                /* Less padding on mobile */
+            }
+
+            .reels {
+                gap: 10px;
+                /* Smaller gap */
+            }
+
+            .reel {
+                min-width: 140px;
+                /* Narrower reels */
+                padding: 20px 10px;
+            }
+
+            .spin-button {
+                padding: 15px 35px;
+                /* Smaller button */
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Main arcade cabinet container -->
+    <div class="arcade-frame">
+        <!-- Title -->
+        <h1>🎰 RETRO SLOT 🎰</h1>
+        <!-- Subtitle -->
+        <p class="subtitle">[ SPIN FOR IDEAS ]</p>
+
+        <!-- Screen that contains the reels -->
+        <div class="screen">
+            <!-- Container for all three reels -->
+            <div class="reels">
+                <!-- Reel 1: Verb -->
+                <div>
+                    <div class="reel-label">VERB</div>
+                    <div class="reel" id="reel1">???</div>
+                </div>
+                <!-- Reel 2: Adjective -->
+                <div>
+                    <div class="reel-label">ADJECTIVE</div>
+                    <div class="reel" id="reel2">???</div>
+                </div>
+                <!-- Reel 3: Noun -->
+                <div>
+                    <div class="reel-label">NOUN</div>
+                    <div class="reel" id="reel3">???</div>
+                </div>
+            </div>
+
+            <!-- Alliteration mode toggle -->
+            <div style="margin: 20px 0;">
+                <label
+                    style="font-size: 0.7rem; color: #00ffff; cursor: pointer; display: inline-flex; align-items: center; gap: 10px;">
+                    <input type="checkbox" id="alliterationMode" style="width: 20px; height: 20px; cursor: pointer;">
+                    <span>ALLITERATION MODE</span>
+                </label>
+                <div style="font-size: 0.5rem; color: #888; margin-top: 5px;">
+                    (All words start with same letter)
+                </div>
+            </div>
+
+            <!-- Spin button - calls spin() when clicked -->
+            <button class="spin-button" onclick="spin()">SPIN [SPACE]</button>
+
+            <!-- Credits/instructions at bottom -->
+            <div class="credits">
+                PRESS SPIN OR SPACEBAR TO START
+            </div>
+        </div>
+
+        <script>
+            // Main spin function - called when button clicked or spacebar pressed
+            function spin() {
+                // Get references to the three reel elements
+                const reel1 = document.getElementById('reel1');
+                const reel2 = document.getElementById('reel2');
+                const reel3 = document.getElementById('reel3');
+
+                // Check if alliteration mode is enabled
+                const alliterationMode = document.getElementById('alliterationMode').checked;
+
+                // Add spinning animation class to all reels
+                reel1.classList.add('spinning');
+                reel2.classList.add('spinning');
+                reel3.classList.add('spinning');
+
+                // Build API URL with alliteration parameter if needed
+                const apiUrl = alliterationMode ? '/api/spin?alliteration=true' : '/api/spin';
+
+                // Fetch new random words from the Flask server
+                fetch(apiUrl)
+                    .then(response => response.json()) // Convert response to JSON
+                    .then(data => {
+                        // Wait 3 seconds for animation to finish
+                        setTimeout(() => {
+                            // Update each reel with new words from server
+                            reel1.textContent = data.word1; // Verb
+                            reel2.textContent = data.word2; // Adjective
+                            reel3.textContent = data.word3; // Noun
+
+                            // Remove spinning animation class
+                            reel1.classList.remove('spinning');
+                            reel2.classList.remove('spinning');
+                            reel3.classList.remove('spinning');
+                        }, 3000); // 3 seconds = 3000 milliseconds
+                    });
+            }
+
+            // Listen for keyboard events on the whole page
+            document.addEventListener('keydown', function (event) {
+                // Check if the pressed key is spacebar
+                if (event.code === 'Space' || event.key === ' ') {
+                    event.preventDefault(); // Prevent page from scrolling down
+                    spin(); // Trigger the spin function
+                }
+            });
+        </script>
+</body>
+
+</html>
