@@ -328,62 +328,87 @@
             line-height: 1.8;
         }
 
-        /* Mobile responsive adjustments - increased breakpoint for better mobile experience */
+        /* Mobile responsive adjustments - compact layout to fit on one screen */
         @media (max-width: 768px) {
+            body {
+                padding: 10px;
+                /* Less padding on mobile */
+            }
+
             h1 {
-                font-size: 1.5rem;
-                /* Slightly smaller title on mobile */
+                font-size: 1.2rem;
+                /* Smaller title */
+                margin-bottom: 5px;
+                /* Less space */
+            }
+
+            .subtitle {
+                font-size: 0.5rem;
+                /* Smaller subtitle */
+                margin-bottom: 20px;
+                /* Less space */
             }
 
             .arcade-frame {
-                padding: 25px 15px;
-                /* Less padding on mobile */
+                padding: 15px 12px;
+                /* Minimal padding */
+            }
+
+            .screen {
+                padding: 15px 10px;
+                /* Less padding */
+                margin-bottom: 15px;
+                /* Less margin */
             }
 
             .reels {
                 flex-direction: column !important;
-                /* Force vertical stacking on mobile */
-                gap: 20px;
-                /* More space between stacked reels */
+                /* Force vertical stacking */
+                gap: 12px;
+                /* Compact spacing between reels */
                 align-items: stretch;
-                /* Full width reels */
+                margin: 15px 0;
+                /* Less margin */
             }
 
             .reel {
                 width: 100% !important;
-                /* Full width on mobile */
                 min-width: unset !important;
-                /* Remove min-width */
                 max-width: 100%;
-                /* Full width */
                 margin: 0 auto;
-                /* Center the reels */
-                font-size: 1.5rem !important;
-                /* Larger text on mobile */
-                padding: 35px 20px;
-                /* More vertical padding for bigger touch targets */
-                height: 110px;
-                /* Slightly taller for better visibility */
+                font-size: 1.3rem !important;
+                /* Still readable but not huge */
+                padding: 20px 15px;
+                /* Compact padding */
+                height: 80px;
+                /* Shorter height */
             }
 
             .reel-label {
-                font-size: 0.6rem;
-                /* Slightly larger labels */
+                font-size: 0.5rem;
+                /* Smaller labels */
+                margin-bottom: 8px;
+            }
+
+            /* Alliteration mode toggle - more compact */
+            .arcade-frame>div[style*="margin: 20px"] {
+                margin: 10px 0 !important;
             }
 
             .spin-button {
-                padding: 20px 45px;
-                /* Bigger button for mobile */
-                font-size: 1.2rem;
+                padding: 15px 35px;
+                /* Smaller button */
+                font-size: 1rem;
                 width: 100%;
-                /* Full width button */
-                max-width: 300px;
-                /* But not too wide */
+                max-width: 280px;
             }
 
             .credits {
-                font-size: 0.55rem;
-                /* Slightly larger credits text */
+                font-size: 0.5rem;
+                margin-top: 15px;
+                /* Less space */
+                line-height: 1.5;
+                /* Tighter line height */
             }
         }
     </style>
