@@ -1,70 +1,74 @@
-# Retro Arcade Slot Machine
+# 🎰 Retro Arcade Slot Machine
 
 A fun, retro arcade-themed prompt generator that gives you random 3-word combinations to spark creative ideas!
 
-🎰 **Live Demo:** [Coming soon after deployment]
+**Powered by Python, Flask, and AI.**
 
-## Features
-- 🎮 Retro arcade aesthetic with neon colors and pixel font
-- ✨ Smooth spinning animations
-- 🎨 Three word categories: Verbs, Adjectives, Nouns
-- 🔤 Alliteration mode - all words start with the same letter
-- ⌨️ Keyboard support - press SPACE to spin
-- 📱 Responsive design
+> 🤖 **Note:** This project was built with the assistance of an AI coding agent to learn Python, Flask, and web development 
 
-## How to Run Locally
+🎰 **Live Demo:** https://retro-slot-machine.onrender.com
 
-1. Install dependencies:
+## ✨ Features
+
+- **🎮 Retro Arcade Aesthetic**: Neon colors, scanline effects, and pixel art font ("Press Start 2P").
+- **⚡ Smooth Animations**: Spinning reels, glowing text, and 3D functionality.
+- **🎨 Creative Prompts**: Generates a random Verb + Adjective + Noun combination from over 150+ words.
+- **🔤 Alliteration Mode**: Toggle this to make all words start with the same random letter (e.g., "Dancing Dark Dragon").
+- **📱 Fully Responsive**: vertical stacking layout optimized for mobile devices - fits perfectly on phone screens!
+- **⌨️ Keyboard Control**: Press `SPACE` to spin the reels.
+
+## 🛠️ Tech Stack
+
+- **Backend**: Python 3, Flask
+- **Frontend**: HTML5, CSS3 (animations, variables, media queries), Vanilla JavaScript
+- **Deployment**: Render (Gunicorn)
+- **Version Control**: Git & GitHub
+
+## 📂 Project Structure
+
+```
+slot-machine-app/
+├── app.py              # Flask application logic & API endpoints
+├── words.py            # Word lists (verbs, adjectives, nouns)
+├── requirements.txt    # Production dependencies
+├── Procfile            # Deployment command for Render
+└── templates/
+    └── index.html      # Single-page app with embedded CSS/JS
+```
+
+## 🚀 How to Run Locally
+
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/Sunny-Teng/retro-slot-machine.git
+   cd retro-slot-machine
+   ```
+
+2. **Install dependencies:**
    ```bash
    pip install -r requirements.txt
    ```
 
-2. Run the app:
+3. **Run the app:**
    ```bash
    python app.py
    ```
 
-3. Open your browser and go to:
-   ```
-   http://127.0.0.1:5001
-   ```
+4. **Open in browser:**
+   Visit `http://0.0.0.0:5001` or `http://localhost:5001`
 
-4. Click SPIN (or press SPACE) and get creative prompts!
+## 🌐 Deployment
 
-## Project Structure
-```
-slot-machine-app/
-├── app.py              # Flask backend
-├── words.py            # Word lists (verbs, adjectives, nouns)
-├── requirements.txt    # Python dependencies
-└── templates/
-    └── index.html      # Retro arcade frontend
-```
+This app is deployed on **Render**.
 
-## Deployment
+1. Connect GitHub repository to Render.
+2. Settings:
+   - **Runtime**: Python 3
+   - **Build Command**: `pip install -r requirements.txt`
+   - **Start Command**: `gunicorn app:app`
 
-This app is configured to deploy on platforms like Render, Railway, or PythonAnywhere.
+## ❤️ Credits
 
-### Deploy to Render
-
-1. Push this code to GitHub
-2. Create a new Web Service on [Render](https://render.com)
-3. Connect your GitHub repository
-4. Render will automatically detect the Flask app and deploy it!
-
-## Customization
-
-- **Add more words**: Edit `words.py`
-- **Change colors/styles**: Modify the CSS in `templates/index.html`
-- **Adjust animation speed**: Change the timeout values in the JavaScript
-
-## Tech Stack
-
-- **Backend**: Python, Flask
-- **Frontend**: HTML, CSS, JavaScript
-- **Font**: Press Start 2P (Google Fonts)
-- **Hosting**: Render (or any Python hosting platform)
-
----
-
-Built with ❤️ and Claude Sonnet 4.5 as a learning project
+- **Creator**: Sunny
+- **AI Co-pilot**: Google DeepMind Antigravity
+- **Font**: [Press Start 2P](https://fonts.google.com/specimen/Press+Start+2P) by CodeMan38
