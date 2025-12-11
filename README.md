@@ -67,4 +67,4 @@ This app is configured to deploy on platforms like Render, Railway, or PythonAny
 
 ---
 
-Built with ❤️ as a learning project
+Built with ❤️ and Claude Sonnet 4.5 as a learning project
